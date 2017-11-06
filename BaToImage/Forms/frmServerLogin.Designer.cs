@@ -53,7 +53,6 @@
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
@@ -95,7 +94,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnIntSecurity);
             this.splitContainer1.Size = new System.Drawing.Size(200, 22);
-            this.splitContainer1.SplitterDistance = 88;
+            this.splitContainer1.SplitterDistance = 87;
             this.splitContainer1.TabIndex = 3;
             // 
             // btnLogin
@@ -103,7 +102,7 @@
             this.btnLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLogin.Location = new System.Drawing.Point(0, 0);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(88, 22);
+            this.btnLogin.Size = new System.Drawing.Size(87, 22);
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -113,7 +112,7 @@
             this.btnIntSecurity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnIntSecurity.Location = new System.Drawing.Point(0, 0);
             this.btnIntSecurity.Name = "btnIntSecurity";
-            this.btnIntSecurity.Size = new System.Drawing.Size(108, 22);
+            this.btnIntSecurity.Size = new System.Drawing.Size(109, 22);
             this.btnIntSecurity.TabIndex = 1;
             this.btnIntSecurity.Text = "Integrated Security";
             this.btnIntSecurity.UseVisualStyleBackColor = true;

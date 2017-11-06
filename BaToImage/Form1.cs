@@ -23,49 +23,116 @@ namespace BaToImage
         public static string connectionString;
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            frmServerLogin frm = new frmServerLogin();
-            frm.ShowDialog();
-            connectionString = "Data Source=" + txtServer.Text + "; Integrated Security=True;";
-            try
+            //frmServerLogin frm = new frmServerLogin();
+            //frm.ShowDialog();
+
+            if (cmbAuthentication.Text == "Windows Authentication")
             {
-                using (var con = new SqlConnection(connectionString))
+                connectionString = "Data Source=" + txtServer.Text + "; Integrated Security=True;";
+                try
                 {
-                    con.Open();
-                    DataTable databases = con.GetSchema("Databases");
-                    cmbDatabase.DataSource = databases;
-                    cmbDatabase.DisplayMember = "database_name";
-                    cmbDatabase.ValueMember = "dbid";
+                    using (var con = new SqlConnection(connectionString))
+                    {
+                        con.Open();
+                        DataTable databases = con.GetSchema("Databases");
+                        cmbDatabase.DataSource = databases;
+                        cmbDatabase.DisplayMember = "database_name";
+                        cmbDatabase.ValueMember = "dbid";
+
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }else if(cmbAuthentication.Text=="SQL Server Authentication")
+            {
+                connectionString = "Data Source=" + txtServer.Text + "; Integrated Security=False; User ID="+txtUserId.Text+";Password="+txtPassword.Text;
+                try
+                {
+                    using (var con = new SqlConnection(connectionString))
+                    {
+                        con.Open();
+                        DataTable databases = con.GetSchema("Databases");
+                        cmbDatabase.DataSource = databases;
+                        cmbDatabase.DisplayMember = "database_name";
+                        cmbDatabase.ValueMember = "dbid";
+
+                    }
+                }
+                catch (Exception)
+                {
 
                 }
             }
-            catch (Exception)
+            else
             {
-
+                MessageBox.Show("Sorry, No Authentication Type Selected!");
             }
 
         }
 
         private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (cmbAuthentication.Text == "Windows Authentication")
             {
-                connectionString = "Data Source=" + txtServer.Text + "; Integrated Security=True; Initial Catalog =" + cmbDatabase.Text;
-                cmbTables.Items.Clear();
-                cmbTables.Text = String.Empty;
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                try
                 {
-                    connection.Open();
-                    DataTable table = connection.GetSchema("Tables");
-                    //List<string> TableNames = new List<string>();
-                    foreach (DataRow row in table.Rows)
+
+                    connectionString = "Data Source=" + txtServer.Text + "; Integrated Security=True; Initial Catalog =" + cmbDatabase.Text;
+                    cmbTables.Items.Clear();
+                    cmbTables.Text = String.Empty;
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        cmbTables.Items.Add(row[2].ToString());
+                        connection.Open();
+                        DataTable table = connection.GetSchema("Tables");
+                        //List<string> TableNames = new List<string>();
+                        foreach (DataRow row in table.Rows)
+                        {
+                            cmbTables.Items.Add(row[2].ToString());
+                        }
+
+
                     }
 
-                } }catch(Exception)
-            {
+                }
+                catch (Exception)
+                {
 
+                }
+
+            }else if(cmbAuthentication.Text=="SQL Server Authentication")
+            {
+                try
+                {
+
+                    connectionString = "Data Source=" + txtServer.Text + "; Integrated Security=False;Initial Catalog =" + cmbDatabase.Text + "; User ID=" + txtUserId.Text + ";Password=" + txtPassword.Text;
+                    cmbTables.Items.Clear();
+                    cmbTables.Text = String.Empty;
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        DataTable table = connection.GetSchema("Tables");
+                        //List<string> TableNames = new List<string>();
+                        foreach (DataRow row in table.Rows)
+                        {
+                            cmbTables.Items.Add(row[2].ToString());
+                        }
+
+
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sorry, No Authentication Type Selected!");
             }
 
         }
@@ -151,6 +218,11 @@ namespace BaToImage
         {
             About frm = new About();
             frm.ShowDialog();
+        }
+
+        private void cmbAuthentication_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tableLayoutPanelUserLogin.Enabled = cmbAuthentication.Text == "SQL Server Authentication";
         }
     }
 }
