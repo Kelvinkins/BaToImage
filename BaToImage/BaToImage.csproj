@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -122,6 +122,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="publish\Application Files\BaToImage_1_0_0_1\BaToImage.application" />
+    <None Include="publish\Application Files\BaToImage_1_0_0_1\BaToImage.exe.config.deploy" />
+    <None Include="publish\Application Files\BaToImage_1_0_0_1\BaToImage.exe.deploy" />
+    <None Include="publish\Application Files\BaToImage_1_0_0_1\BaToImage.exe.manifest" />
+    <None Include="publish\BaToImage.application" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -137,6 +142,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="publish\setup.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
